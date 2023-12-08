@@ -82,6 +82,7 @@ class LocalStorage(BaseStorage):
                 file,
                 default=encode_complex,
                 ignore_nan=True,
+                ensure_ascii=False
             )
 
     async def write_json_file_async(self, file_path: str, data) -> None:
@@ -90,6 +91,7 @@ class LocalStorage(BaseStorage):
                 data,
                 default=encode_complex,
                 ignore_nan=True,
+                ensure_ascii=False
             )
             await file.write(fcontent)
 

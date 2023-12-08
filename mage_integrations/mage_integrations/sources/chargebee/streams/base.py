@@ -88,13 +88,13 @@ class BaseChargebeeStream():
                 for k in record['content'][content_obj].keys():
                     if "cf_" in k:
                         event_custom_fields[k] = record['content'][content_obj][k]
-                record['content'][content_obj]['custom_fields'] = json.dumps(event_custom_fields)
+                record['content'][content_obj]['custom_fields'] = json.dumps(event_custom_fields, ensure_ascii=False)
 
         for key in record.keys():
             if "cf_" in key:
                 custom_fields[key] = record[key]
         if custom_fields:
-            record['custom_fields'] = json.dumps(custom_fields)
+            record['custom_fields'] = json.dumps(custom_fields, ensure_ascii=False)
         return record
 
     # This overrides the transform_record method in the Fistown Analytics tap-framework package

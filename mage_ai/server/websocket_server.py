@@ -365,11 +365,11 @@ class WebSocketServer(tornado.websocket.WebSocketHandler):
         if block_uuid or pipeline_uuid:
             logger.info(
                 f'[{block_uuid}] Sending message for {msg_id} to '
-                f'{len(cls.clients)} client(s):\n{json.dumps(message_final, indent=2)}'
+                f'{len(cls.clients)} client(s):\n{json.dumps(message_final, indent=2, ensure_ascii=False)}'
             )
 
             for client in cls.clients:
-                client.write_message(json.dumps(message_final))
+                client.write_message(json.dumps(message_final, ensure_ascii=False))
 
     def __execute_block(
         self,
@@ -509,7 +509,7 @@ db_connection.start_session()
                         token=message.get('token'),
                         type=downstream_block.type,
                         uuid=downstream_block.uuid,
-                    )))
+                    ), ensure_ascii=False))
 
     def __execute_pipeline(
         self,

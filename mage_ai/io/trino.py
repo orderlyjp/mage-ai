@@ -230,6 +230,7 @@ class Trino(BaseSQL):
                     val,
                     default=encode_complex,
                     ignore_nan=True,
+                    ensure_ascii=False
                 )
             return val
 

@@ -317,7 +317,7 @@ class UsageStatisticLogger():
                 ) as response:
                     response_json = await response.json()
                     if response_json.get('success'):
-                        print(json.dumps(data_to_send, indent=2))
+                        print(json.dumps(data_to_send, indent=2, ensure_ascii=False))
                         return True
         except Exception as err:
             print(f'Error: {err}')

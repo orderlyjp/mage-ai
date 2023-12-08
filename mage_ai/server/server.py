@@ -378,7 +378,7 @@ def make_app(template_dir: str = None, update_routes: bool = False):
     if not os.path.exists(file_path):
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
         with open(file_path, 'w') as f:
-            f.write(json.dumps({}))
+            f.write(json.dumps({}, ensure_ascii=False))
 
     autoreload.watch(file_path)
 

@@ -171,7 +171,7 @@ class OperationHistoryReader:
         return arr
 
     async def save(self, operation_history: OperationHistory) -> None:
-        text = json.dumps(operation_history.to_dict())
+        text = json.dumps(operation_history.to_dict(), ensure_ascii=False)
         file_path = self.build_file_path(timestamp=operation_history.timestamp)
         self.storage.makedirs(os.path.dirname(file_path), exist_ok=True)
         with self.storage.open_to_write(file_path, append=True) as f:

@@ -144,6 +144,7 @@ class DBTBlock(Block):
             },
             default=encode_complex,
             ignore_nan=True,
+            ensure_ascii=False
         )
 
     @classmethod

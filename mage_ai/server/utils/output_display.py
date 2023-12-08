@@ -166,12 +166,13 @@ def __custom_output():
                     columns=_columns,
                     index=_index,
                     rows=_rows,
-                    shape=_shape,
+                    shape=_shape,                    
                 ),
-                type='table',
+                type='table',                
             ),
             default=encode_complex,
             ignore_nan=True,
+            ensure_ascii=False
         )
         return print(f'[__internal_output__]{{_json_string}}')
     elif isinstance(_internal_output_return, pl.DataFrame):
@@ -195,6 +196,7 @@ def __custom_output():
             ),
             default=encode_complex,
             ignore_nan=True,
+            ensure_ascii=False
         )
         return print(f'[__internal_output__]{{_json_string}}')
     elif not {is_print_statement}:

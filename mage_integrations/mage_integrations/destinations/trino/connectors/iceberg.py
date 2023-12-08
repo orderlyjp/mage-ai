@@ -34,4 +34,4 @@ class TrinoIceberg(TrinoConnector):
             return 'NULL'
         item_type_converted = column_type_dict['item_type_converted']
 
-        return f"CAST('{json.dumps(value)}' AS {item_type_converted})"
+        return f"CAST('{json.dumps(value, ensure_ascii=False)}' AS {item_type_converted})"

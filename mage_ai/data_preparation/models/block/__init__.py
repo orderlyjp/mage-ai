@@ -1061,7 +1061,7 @@ class Block(DataIntegrationMixin, SparkBlock, ProjectPlatformAccessible):
                 conditional_message += 'This block would not be executed in a trigger run.\n'
             conditional_json = json.dumps(dict(
                 message=conditional_message,
-            ))
+            ), ensure_ascii=False)
             print(f'[__internal_test__]{conditional_json}')
 
         callback_arr = []
@@ -1198,6 +1198,7 @@ class Block(DataIntegrationMixin, SparkBlock, ProjectPlatformAccessible):
                         block_output,
                         default=encode_complex,
                         ignore_nan=True,
+                        ensure_ascii=False
                     ) if not disable_json_serialization else block_output,
                 )
             else:
@@ -1957,6 +1958,7 @@ df = get_variable('{self.pipeline.uuid}', '{self.uuid}', 'df')
                         data,
                         default=datetime.isoformat,
                         ignore_nan=True,
+                        ensure_ascii=False
                     ),
                     type=DataType.TEXT,
                     variable_uuid=v,
@@ -2075,6 +2077,7 @@ df = get_variable('{self.pipeline.uuid}', '{block_uuid}', 'df')
                         data,
                         default=datetime.isoformat,
                         ignore_nan=True,
+                        ensure_ascii=False
                     ),
                     type=DataType.TEXT,
                     variable_uuid=v,
@@ -2552,7 +2555,7 @@ df = get_variable('{self.pipeline.uuid}', '{block_uuid}', 'df')
                                 error=str(err),
                                 message=error_message,
                                 stacktrace=stacktrace.split('\n'),
-                            ))
+                            ), ensure_ascii=False)
                             print(f'[__internal_test__]{error_json}')
                         else:
                             print('==============================================================')
@@ -2565,7 +2568,7 @@ df = get_variable('{self.pipeline.uuid}', '{block_uuid}', 'df')
                     if len(test_functions) >= 1:
                         success_json = json.dumps(dict(
                             message=message,
-                        ))
+                        ), ensure_ascii=False)
                         print(f'[__internal_test__]{success_json}')
                 else:
                     print('--------------------------------------------------------------')
@@ -2658,7 +2661,7 @@ df = get_variable('{self.pipeline.uuid}', '{block_uuid}', 'df')
         def save_variable_and_reset_state() -> None:
             if state['msg_key'] is not None and state['msg_value'] is not None:
                 state['msg_value']['data'] = state['consolidated_data']
-                consolidated_print_variables[state['msg_key']] = json.dumps(state['msg_value'])
+                consolidated_print_variables[state['msg_key']] = json.dumps(state['msg_value'], ensure_ascii=False)
             state['msg_key'] = None
             state['msg_value'] = None
             state['msg_type'] = None

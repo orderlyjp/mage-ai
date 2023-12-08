@@ -200,7 +200,7 @@ class DataIntegrationMixin:
 
         if catalog:
             with open(catalog_full_path, mode='w') as f:
-                f.write(json.dumps(catalog))
+                f.write(json.dumps(catalog, ensure_ascii=False))
 
     def is_data_integration(self) -> bool:
         """

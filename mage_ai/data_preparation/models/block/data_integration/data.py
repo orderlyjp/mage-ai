@@ -35,6 +35,7 @@ def convert_dataframe_to_output(
                 type=OUTPUT_TYPE_RECORD,
             ),
             default=encode_complex,
+            ensure_ascii=False
         )
         return f'{text}\n'
 
@@ -67,7 +68,7 @@ def convert_dataframe_to_output(
 
             with open(file_path, 'w') as f:
                 if schema:
-                    f.write(f'{json.dumps(schema)}\n')
+                    f.write(f'{json.dumps(schema, ensure_ascii=False)}\n')
 
                 for record in records_in_batch:
                     f.write(_output(record))
@@ -81,7 +82,7 @@ def convert_dataframe_to_output(
             output_file_paths.append(file_path)
     elif io_buffer:
         if schema:
-            io_buffer.write(f'{json.dumps(schema)}\n')
+            io_buffer.write(f'{json.dumps(schema, ensure_ascii=False)}\n')
 
         for record in records:
             io_buffer.write(_output(record))

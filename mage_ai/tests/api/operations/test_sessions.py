@@ -148,7 +148,7 @@ class SessionOperationTests(BaseApiTestCase):
         self.assertIsNotNone(response['error'])
 
     @patch('mage_ai.api.resources.SessionResource.AUTHENTICATION_MODE', 'ldap')
-    @patch('mage_ai.authentication.ldap.LDAP_ROLES_MAPPING', json.dumps(dict(Admin=['Admin'])))
+    @patch('mage_ai.authentication.ldap.LDAP_ROLES_MAPPING', json.dumps(dict(Admin=['Admin']), ensure_ascii=False))
     @patch.object(LDAPConnection, 'authorize')
     @patch.object(LDAPConnection, 'authenticate')
     async def test_ldap_login_with_role_mapping(self, mock_authenticate, mock_authorize):

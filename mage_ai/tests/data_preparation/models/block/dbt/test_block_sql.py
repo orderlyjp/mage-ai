@@ -272,12 +272,12 @@ class DBTBlockSQLProjectPlatformTest(ProjectPlatformMixin, BlockWithProjectPlatf
                 depends_on=dict(nodes=[]),
                 original_file_path='models/water.sql',
                 unique_id='water',
-            )),
+            ), ensure_ascii=False),
             json.dumps(dict(
                 depends_on=dict(nodes=['water']),
                 original_file_path='models/ice.sql',
                 unique_id='ice',
-            )),
+            ), ensure_ascii=False),
         ])
         Profiles.return_value.__enter__.return_value.profiles_dir = 'test_profiles_dir'
 

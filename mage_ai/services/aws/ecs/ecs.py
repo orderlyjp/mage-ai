@@ -15,7 +15,7 @@ def run_task(
     client = get_aws_boto3_client('ecs')
     response = client.run_task(**ecs_config.get_task_config(command=command))
 
-    print(json.dumps(response, indent=4, default=str))
+    print(json.dumps(response, indent=4, default=str, ensure_ascii=False))
 
     if wait_for_completion:
         arn = response['tasks'][0]['taskArn']

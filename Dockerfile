@@ -48,9 +48,9 @@ RUN \
   # faster-fifo is not supported on Windows: https://github.com/alex-petrenko/faster-fifo/issues/17
   pip3 install --no-cache-dir faster-fifo && \
   if [ -z "$FEATURE_BRANCH" ] || [ "$FEATURE_BRANCH" = "null" ]; then \
-  pip3 install --no-cache-dir "git+https://github.com/mage-ai/mage-ai.git#egg=mage-integrations&subdirectory=mage_integrations"; \
+  pip3 install --no-cache-dir "git+https://github.com/orderlyjp/mage-ai.git#egg=mage-integrations&subdirectory=mage_integrations"; \
   else \
-  pip3 install --no-cache-dir "git+https://github.com/mage-ai/mage-ai.git@$FEATURE_BRANCH#egg=mage-integrations&subdirectory=mage_integrations"; \
+  pip3 install --no-cache-dir "git+https://github.com/orderlyjp/mage-ai.git@$FEATURE_BRANCH#egg=mage-integrations&subdirectory=mage_integrations"; \
   fi
 
 # Mage
@@ -58,9 +58,9 @@ COPY ./mage_ai/server/constants.py /tmp/constants.py
 RUN if [ -z "$FEATURE_BRANCH" ] || [ "$FEATURE_BRANCH" = "null" ] ; then \
   tag=$(tail -n 1 /tmp/constants.py) && \
   VERSION=$(echo "$tag" | tr -d "'") && \
-  pip3 install --no-cache-dir "mage-ai[all]==$VERSION"; \
+  pip3 install --no-cache-dir "git+https://github.com/orderlyjp/mage-ai.git#egg=mage-ai[all]"; \
   else \
-  pip3 install --no-cache-dir "git+https://github.com/mage-ai/mage-ai.git@$FEATURE_BRANCH#egg=mage-ai[all]"; \
+  pip3 install --no-cache-dir "git+https://github.com/orderlyjp/mage-ai.git@$FEATURE_BRANCH#egg=mage-ai[all]"; \
   fi
 
 

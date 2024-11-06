@@ -48,6 +48,6 @@ else
     elif [[ ! -z "${MANAGE_INSTANCE}" ]]; then
         mage start $PROJECT_PATH --manage-instance 1
     else
-        mage start $PROJECT_PATH --project-type $MAGE_PROJECT_TYPE "${mage_args[@]}"
+        mage start $PROJECT_PATH --project-type $MAGE_PROJECT_TYPE "${mage_args[@]}" --port $PORT
     fi
 fi
